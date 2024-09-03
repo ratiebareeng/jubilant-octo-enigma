@@ -90,6 +90,6 @@ def scrape_lyrics(url):
 
 
 # Example usage
-url = "https://genius.com/Nipsey-hussle-victory-lap-lyrics"
-result = scrape_lyrics(url)
-print(json.dumps(result, indent=2))
+# url = "https://genius.com/Nipsey-hussle-victory-lap-lyrics"
+# result = scrape_lyrics(url)
+# print(json.dumps(result, indent=2))
