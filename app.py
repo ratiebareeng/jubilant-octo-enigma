@@ -1,7 +1,7 @@
 from crypt import methods
 
 from flask import Flask, request, jsonify
-from lyric_scraper import scrape_lyrics, result  # Ensure you have this module
+from lyric_scraper import scrape_lyrics # Ensure you have this module
 from scraper import  request_song_url
 
 app = Flask(__name__)
