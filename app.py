@@ -2,7 +2,7 @@ from crypt import methods
 
 from flask import Flask, request, jsonify
 from lyric_scraper import scrape_lyrics # Ensure you have this module
-from scraper import  request_song_url
+from scraper import  request_song_url, scrape_song_lyrics
 
 app = Flask(__name__)
 
@@ -33,8 +33,12 @@ def scrape_artist():
         songCap = 10
 
     try:
-        result = request_song_url(artist_name, songCap)
-        return jsonify(result)
+        songs = request_song_url(artist_name, songCap)
+        # songs = request_song_url('Nipsey Hussle', 10)
+        #
+        for song in songs:
+            song['lyrics'] = scrape_song_lyrics(song['url'])
+        return jsonify(songs)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
