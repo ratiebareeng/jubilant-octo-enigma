@@ -164,10 +164,3 @@ def write_lyrics_to_json(song_to):
         else:
             outfile.write(song_json_object)
 
-
-# songs = request_song_url('Nipsey Hussle', 10)
-#
-# for song in songs:
-#     song['lyrics'] = scrape_song_lyrics(song['url'])
-#     #write_lyrcis_to_file(song)
-#     write_lyrics_to_json(song)

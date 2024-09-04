@@ -88,8 +88,3 @@ def scrape_lyrics(url):
 
     return lyrics_json
 
-
-# Example usage
-# url = "https://genius.com/Nipsey-hussle-victory-lap-lyrics"
-# result = scrape_lyrics(url)
-# print(json.dumps(result, indent=2))
