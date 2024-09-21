@@ -6,7 +6,6 @@ from scraper import  request_song_url, scrape_song_lyrics
 
 app = Flask(__name__)
 
-
 @app.route('/scrape', methods=['POST'])
 def scrape():
     data = request.get_json()
@@ -34,8 +33,7 @@ def scrape_artist():
 
     try:
         songs = request_song_url(artist_name, songCap)
-        # songs = request_song_url('Nipsey Hussle', 10)
-        #
+
         for song in songs:
             song['lyrics'] = scrape_song_lyrics(song['url'])
         return jsonify(songs)
