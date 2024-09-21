@@ -137,6 +137,20 @@ def lyrics(song_url=None, remove_section_headers=False):
 def check_value(data, val):
     return any(player['steam64']==val for player in data['players'])
 
+
+def write_lyrcis_to_file(song):
+    csv_file = open(f"{song['artist']}_lyrics.csv", 'a', encoding='utf-8', newline='')
+    writer = csv.writer(csv_file)
+    writer.writerow(['Artist', 'Title', 'URL', 'Lyrics'])
+    df = pandas.read_csv(f'{song['artist']}_lyrics.csv')
+
+    if df['Title'].eq(song['title']).any():
+        print(f'{song['title']} already exists')
+    else:
+        writer.writerow(song.values())
+        csv_file.close()
+
+
 def write_lyrics_to_json(song_to):
     song_json_object = json.dumps(song_to, indent=4)
     song_url = song_to['artist'].replace(' ', '_')
@@ -147,7 +161,7 @@ def write_lyrics_to_json(song_to):
 
         #if song_to['url'] not in artist_data:
         if artist_data.__contains__(song_to['url']):
-            print(f'{song_to['title']} already exists')
+            print(f"{song_to['title']} already exists")
         else:
             outfile.write(song_json_object)
 
