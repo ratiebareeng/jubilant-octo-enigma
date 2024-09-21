@@ -134,6 +134,19 @@ def lyrics(song_url=None, remove_section_headers=False):
     return lyrics_string.replace("\n", " ")
 
 
+def write_lyrcis_to_file(song):
+    csv_file = open(f'{song['artist']}_lyrics.csv', 'a', encoding='utf-8', newline='')
+    writer = csv.writer(csv_file)
+    writer.writerow(['Artist', 'Title', 'URL', 'Lyrics'])
+    df = pandas.read_csv(f'{song['artist']}_lyrics.csv')
+
+    if df['Title'].eq(song['title']).any():
+        print(f'{song['title']} already exists')
+    else:
+        writer.writerow(song.values())
+        csv_file.close()
+
+
 def check_value(data, val):
     return any(player['steam64']==val for player in data['players'])
 
