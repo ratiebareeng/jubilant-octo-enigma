@@ -142,10 +142,10 @@ def write_lyrcis_to_file(song):
     csv_file = open(f"{song['artist']}_lyrics.csv", 'a', encoding='utf-8', newline='')
     writer = csv.writer(csv_file)
     writer.writerow(['Artist', 'Title', 'URL', 'Lyrics'])
-    df = pandas.read_csv(f'{song['artist']}_lyrics.csv')
+    df = pandas.read_csv(f"{song['artist']}_lyrics.csv")
 
     if df['Title'].eq(song['title']).any():
-        print(f'{song['title']} already exists')
+        print(f"{song['title']} already exists")
     else:
         writer.writerow(song.values())
         csv_file.close()
