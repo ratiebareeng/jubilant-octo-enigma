@@ -1,6 +1,8 @@
 from crypt import methods
 
 from flask import Flask, request, jsonify
+
+from db_connection import save_song_to_mongodb
 from lyric_scraper import scrape_lyrics # Ensure you have this module
 from scraper import  request_song_url, scrape_song_lyrics
 
@@ -36,6 +38,7 @@ def scrape_artist():
 
         for song in songs:
             song['lyrics'] = scrape_song_lyrics(song['url'])
+            save_song_to_mongodb(song)
         return jsonify(songs)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
