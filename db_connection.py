@@ -1,15 +1,13 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import certifi
-import requests
-from bs4 import BeautifulSoup
-import re
+#import certifi
 
 uri = "mongodb+srv://ratie:c9ydQe0B0YYiGNo4@jibulant-octo-enigma.qzu5j.mongodb.net/?retryWrites=true&w=majority&appName=jibulant-octo-enigma"
 
 # MongoDB connection setup
 # Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'), tlsCAFile=certifi.where())
+#client = MongoClient(uri, server_api=ServerApi('1'), tlsCAFile=certifi.where())
+client = MongoClient(uri, server_api=ServerApi('1'))
 
 #Send a ping to confirm a successful connection
 try:
@@ -32,22 +30,3 @@ def save_song_to_mongodb(song):
         # Insert the song into the database
         result = songs_collection.insert_one(song)
         print(f"Saved {song['title']} to MongoDB with id: {result.inserted_id}")
-
-
-# Your existing functions (request_artist_info, request_song_url, scrape_song_lyrics, lyrics) remain unchanged
-
-# Modified main scraping loop
-def scrape_artist_songs(artist_name, song_cap):
-    songs = request_song_url(artist_name, song_cap)
-    for song in songs:
-        lyrics = scrape_song_lyrics(song['url'])
-        song['lyrics'] = lyrics
-        save_song_to_mongodb(song)
-
-
-# Example usage
-if __name__ == "__main__":
-    artist_name = "Taylor Swift"  # Replace with the artist you want to scrape
-    song_cap = 5  # Number of songs to scrape
-    scrape_artist_songs(artist_name, song_cap)
-
