@@ -44,7 +44,7 @@ def request_song_url(artist_name, song_cap):
         # Collect up to song_cap song objects from artist
         song_info = []
         for hit in json['response']['hits']:
-            if artist_name.lower() in hit['result']['primary_artist']['name'].lower():
+            if artist_name.lower() == hit['result']['primary_artist']['name'].lower():
                 song_info.append(hit)
 
         # Collect song info from song objects
@@ -165,3 +165,5 @@ def write_lyrics_to_json(song_to):
         else:
             outfile.write(song_json_object)
 
+
+request_song_url('Nas', 1)
